@@ -6,7 +6,7 @@ option go_package = "/proto";
 import "google/protobuf/timestamp.proto";
 
 service OrderService {
-  rpc CreateOrder(CreateOrderRequest) returns (OrderResponse);
+  rpc CreateOrder(CreateOrderRequest) returns (SuccessResponse);
   rpc CancelOrder(CancelOrderRequest) returns (SuccessResponse);
 }
 
