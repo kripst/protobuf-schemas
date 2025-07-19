@@ -6,7 +6,8 @@ option go_package = "proto"
 import "google/protobuf/timestamp.proto";
 
 service OrderService {
-  rpc CreateOrder (CreateOrderRequest) returns (OrderResponse);
+  rpc CreateOrder(CreateOrderRequest) returns (SuccessResponse);
+  rpc CancelOrder(CancelOrderRequest) returns (SuccessResponse);
 }
 
 enum OrderStatus {
@@ -28,11 +29,15 @@ message CreateOrderRequest {
   google.protobuf.Timestamp created_at = 7;
 }
 
+message CancelOrderRequest {
+  string order_id = 1;
+}
+
 message OrderItem {
   string id = 1;
   int32 price_kopecks = 2;
 }
 
-message OrderResponse {
+message SuccessResponse {
   string responce = 1;
 }
