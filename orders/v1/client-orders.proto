@@ -8,20 +8,10 @@ service OrderService {
   rpc CancelOrder(CancelOrderRequest) returns (SuccessResponse);
 }
 
-enum OrderStatus {
-  STATUS_NEW = 0;
-  STATUS_PROCESSING = 1;
-  STATUS_READY = 2;
-  STATUS_DELIVERING = 3;
-  STATUS_DELIVERED = 4;
-  STATUS_CANCELLED = 5;
-}
-
 message CreateOrderRequest {
   string request_id = 1;
   string user_id = 2;
   string darkstore_id = 3;
-  OrderStatus status = 4;
   int32 total_price_kopecks = 5;
   repeated OrderItem items = 6;
 }
@@ -36,7 +26,6 @@ message CancelOrderRequest {
 
 message OrderItem {
   string product_id = 1;
-  string order_id = 2;
   int32 price_kopecks = 3;
   int32 quantity = 4;
 }
