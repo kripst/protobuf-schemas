@@ -9,11 +9,32 @@ service OrderService {
 }
 
 message CreateOrderRequest {
-  string request_id = 1;
-  string user_id = 2;
-  string darkstore_id = 3;
-  int32 total_price_kopecks = 5;
-  repeated OrderItem items = 6;
+  string request_id = 1;           // Уникальный ID запроса
+  string user_id = 2;              // ID пользователя
+  string darkstore_id = 3;         // ID темного магазина (склада)
+  
+  // Информация о клиенте
+  string customer_name = 4;        // Имя
+  string customer_surname = 5;     // Фамилия
+  string customer_phone = 6;       // Телефон (в формате "+79161234567")
+  
+  // Доставка
+  string delivery_window = 7;      // Формат: "13:20-14:20" (кратно 20 минутам)
+  string address = 8;              // Полный адрес
+  bool under_door = 9;             // Оставить у двери?
+  bool call_before = 10;           // Позвонить перед доставкой?
+  string comment_to_courier = 11;  // Комментарий курьеру
+  
+  // Заказ
+  int32 total_price = 12;          // Общая стоимость в рублях
+  repeated OrderItem items = 13;   // Список товаров
+}
+
+message OrderItem {
+  string product_id = 1;
+  string name = 2;
+  int32 quantity = 3;
+  int32 price = 4;  // Цена за единицу в рублях
 }
 
 message CreateOrderResponce {
@@ -22,12 +43,7 @@ message CreateOrderResponce {
 
 message CancelOrderRequest {
   string order_id = 1;
-}
-
-message OrderItem {
-  string product_id = 1;
-  int32 price_kopecks = 3;
-  int32 quantity = 4;
+  string reason   = 2;
 }
 
 message SuccessResponse {
